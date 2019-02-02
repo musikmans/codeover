@@ -6,16 +6,6 @@ class QuestionsController < ApplicationController
     end
 
     def create
-        @question = Question.new question_params
-        @question.user = current_user
-        @question.quiz = Quiz.find params[:id]
-        
-
-        if @question.save
-            redirect_to 
-        else
-            render :new
-        end
     end
 
     def index
