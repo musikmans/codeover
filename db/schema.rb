@@ -19,18 +19,22 @@ ActiveRecord::Schema.define(version: 2019_02_02_023552) do
     t.text "body"
     t.boolean "correctness", default: false
     t.bigint "question_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.text "body"
     t.integer "points"
     t.bigint "quiz_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_questions_on_quiz_id"
+    t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
   create_table "quizzes", force: :cascade do |t|
@@ -50,9 +54,12 @@ ActiveRecord::Schema.define(version: 2019_02_02_023552) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
   add_foreign_key "questions", "quizzes"
+  add_foreign_key "questions", "users"
   add_foreign_key "quizzes", "users"
 end
