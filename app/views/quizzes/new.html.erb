@@ -1,1 +1,22 @@
-<h1>Create a new quiz</h1>
+<h1>Create a Quiz</h1>
+
+<%= form_with(model: @quiz, local: true) do |f| %>
+
+    <% if @quiz.errors.present? %>
+        <p class="form-errors" >
+            <%= @quiz.errors.full_messages.join(", ") %>
+        </p>
+    <% end %>
+
+    <div>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+    </div>
+
+    <div>
+        <%= f.label :points %>
+        <%= f.text_field :points %>
+    </div>
+
+    <%= f.submit "Create Questions" %>
+<% end %>
