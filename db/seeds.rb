@@ -38,7 +38,7 @@ users = User.all
     quiz_creator = users.sample
 
     q = Quiz.create(
-        name: Faker::Lorem.words(5, true),
+        name: Faker::Lorem.words(5, true).join(" "),
         description: Faker::Lorem.sentence(1, true, 5),
         user: quiz_creator
     )
