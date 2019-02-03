@@ -2,11 +2,17 @@ class QuizzesController < ApplicationController
     # before_action: 
 
     def new
-
+        @quiz = Quiz.new
     end
 
     def create
-
+        @quiz = Quiz.new quiz_params
+        @quiz.user = current_user
+        if @quiz.save
+            redirect_to question_path(@question.id)
+        else
+            render :new
+        end
     end
 
     def index
