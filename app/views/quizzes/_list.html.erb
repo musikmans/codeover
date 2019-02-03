@@ -1,13 +1,21 @@
-<ul class="quiz-list">
-  <% @quizzes.each do |quiz| %>
-    <li>
 
-        <%= link_to(quiz.name, quizzes_path) %> <br>
-        <%= link_to 'Edit quiz', edit_quiz_path(quiz), class: 'btn btn-sm btn-primary' %> 
+  <% @quizzes.each do |quiz| %>
+  <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-12 d-flex">
+        <div class="mb-3 card" style="width: 18rem;">
+        <div class="card-body">
+        <%= link_to(quiz.name, quizzes_path) %> <br />
+        <%= quiz.description %> <br />
+        </div>
+        <% if can? :edit, quiz %>
+        <div class="card-footer d-flex flex-row justify-content-between">
+        <%= link_to 'Edit quiz', edit_quiz_path(quiz), class: 'btn btn-sm btn-primary align-self-end' %> 
+        <% end %>
+        <% if can? :delete, quiz %>
         <%= link_to 'Delete quiz', quiz_path(quiz), method: :delete, 
                             data: {confirm: 'You are about to delete this quiz, are you sure?'},
-                            class: "btn btn-sm btn-danger" %>
-      
-    </li>
+                            class: "btn btn-sm btn-danger float-right" %>
+        </div>
+        <% end %>
+        </div>
+  </div>
   <% end %>
-</ul>
