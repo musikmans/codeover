@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create]
 
-  resource :quizzes do
+  resources :quizzes do
     resources :questions
   end
 
-  resource :questions do
+  resources :questions do
     resources :answers
   end
 end

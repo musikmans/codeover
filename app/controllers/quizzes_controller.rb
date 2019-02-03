@@ -11,30 +11,33 @@ class QuizzesController < ApplicationController
         @quiz = Quiz.new quiz_params
         @quiz.user = current_user
         if @quiz.save
-            redirect_to quiz_path(@quiz.id)
+            redirect_to new_quiz_question_path(@quiz.id)
+            flash[:primary] = "You have successfully created a new quiz, now create your set of questions."
         else
             render :new
+            flash[:danger] = "Opps, something went wrong!"
         end
     end
 
     def index
-        @questions = Question.all
+        @quizzes = Quiz.all
     end
 
     def show
-        @questions = @quiz.questions.order(created_at: :desc)
-        @question = Question.new
+        @questions = @quiz.questions.order(created_at: :asc)
     end
     
     def edit
-
+        @questions = @quiz.questions
     end
 
     def update
         if @quiz.update quiz_params
-            redirect_to quiz_path(@quiz.id)
+            redirect_to quizzes_path
+            flash[:primary] = "Your quiz has been successfully updated!"
           else
             render :edit
+            flash[:danger] = "Oops, something went wrong!"
         end
     end
 
@@ -51,11 +54,11 @@ class QuizzesController < ApplicationController
     def find_quiz
         @quiz = Quiz.find params[:id]
     end
-    def authorize_user!
-        
+
+    def authorize_user!    
         unless can?(:crud, @question)
           flash[:danger] = "Access Denied"
           redirect_to question_path(@question)
         end
-      end
+    end
 end

@@ -1,0 +1,44 @@
+<h1>Edit Quiz</h1>
+
+<%= form_with(model: @quiz, local: true) do |f| %>
+    
+    <% if @quiz.errors.present? %>
+        <p class="form-errors" >
+            <%= @quiz.errors.full_messages.join(", ") %>
+        </p>
+    <% end %>
+
+    <div>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+    </div>
+
+    <div>
+        <%= f.label :points %>
+        <%= f.text_field :points %>
+    </div>
+
+    <h1>Questions:</h1>
+    <% @questions.each do |question| %>
+        <div>
+            <div>
+                <%= question.label :body %>
+                <%= question.text_area :body %>
+            </div>
+
+            <div>
+                <%= question.label :points %>
+                <%= question.text_field :points %>
+            </div>
+        </div>
+        
+        <small>
+            <% if can?(:edit, @question) %>
+                <%= link_to("Edit Question", edit_quiz_question_path(@quiz.id, question.id)) %>
+            <% end  %>
+        </small>
+
+    <% end %>
+
+    <%= f.submit "Update your Quiz" %>
+<% end %>
