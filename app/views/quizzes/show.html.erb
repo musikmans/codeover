@@ -1,0 +1,5 @@
+<small>
+    <% if can?(:edit, question) %>
+        <%= link_to("Edit Question", edit_quiz_question_path(@quiz.id, question.id)) %>
+    <% end  %>
+</small>
