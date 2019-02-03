@@ -9,7 +9,7 @@ class Question < ApplicationRecord
     presence: {
       message: "Question body can't be empty"
     },
-  length: { minimum: 10 }
+    length: { minimum: 10 }
   )
 
 end
