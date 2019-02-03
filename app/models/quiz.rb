@@ -19,7 +19,8 @@ class Quiz < ApplicationRecord
       message: "Please enter a brief description for the quiz"
     },
     length: {
-      minimum: 10
+      minimum: 10,
+      message: "Description is too short"
     }
   )
 end
