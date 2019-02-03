@@ -4,9 +4,9 @@
         <img src="/images/codeover.svg" width="500px" alt="Coveover" />
         <p>Please choose an option:</p>
         <div class="buttons">
-        <button type="button" class="btn btn-danger" style="background-color:#ce0000">Take a quiz</button>
+         <%= button_to("Take a quiz", quizzes_path, :class => "btn btn-danger", method: :get, :style => "background-color:#ce0000;") %>
         <% if user_signed_in? %>
-        <%= button_to("Create a quiz", new_quizzes_path, :class => "btn btn-danger", method: :get, :style => "background-color:#ce0000;margin-left:40px;") %>
+        <%= button_to("Create a quiz", new_quiz_path, :class => "btn btn-danger", method: :get, :style => "background-color:#ce0000;margin-left:40px;") %>
         <% else %>
         <%= button_to("Create a quiz", new_session_path, :class => "btn btn-danger", method: :get, :style => "background-color:#ce0000;margin-left:40px;") %>
         <% end %>

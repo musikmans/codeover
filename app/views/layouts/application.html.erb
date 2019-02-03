@@ -21,13 +21,17 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarsExample04" style="font-size:20px;">
       <% if user_signed_in? %>
         <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-        Hello 👩‍💻<%= current_user.first_name %>,
-          <%= link_to "Logout", session_path,
-          method: :delete,
-                  data: {confirm: "are you sure you want to log out?"} %>
+        <li class="nav-item" style="color:#fff;margin-top:7px;margin-right:5px;">
+        👩‍💻 Hello <%= current_user.first_name %>
+        </li>
           <li class="nav-item">
             <%= link_to("Home", root_path, :class => "nav-link") %>
+          </li>
+          <li class="nav-item">
+            <%= link_to("Create a quiz",  new_quiz_path, :class => "nav-link") %>
+          </li>
+          <li class="nav-item">
+            <%= link_to("Take a quiz", quizzes_path, :class => "nav-link") %>
           </li>
           <li class="nav-item">
           <%= link_to "Logout", session_path,
@@ -36,6 +40,19 @@
           </li> 
         </ul>
       <% else %>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <li class="nav-item">
+            <%= link_to("Home", root_path, :class => "nav-link") %>
+          </li>
+          <li class="nav-item">
+            <%= link_to("Sign in", new_session_path, :class => "nav-link") %>
+          </li>
+          <li class="nav-item">
+            <%= link_to("Sign up", new_user_path, :class => "nav-link") %>
+          </li>
+        </li> 
+      </ul>
       <% end %>
       </div>
     </nav>

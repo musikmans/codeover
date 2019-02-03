@@ -31,7 +31,6 @@ class QuestionsController < ApplicationController
         render quizzes_path(@quiz)
        end
     end
-x
 
     def destroy
         @question.destroy
