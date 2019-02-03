@@ -11,11 +11,11 @@ class QuizzesController < ApplicationController
         @quiz = Quiz.new quiz_params
         @quiz.user = current_user
         if @quiz.save
-            redirect_to new_quiz_question_path(@quiz.id)
             flash[:primary] = "You have successfully created a new quiz, now create your set of questions."
+            redirect_to new_quiz_question_path(@quiz.id)
         else
-            render :new
             flash[:danger] = "Opps, something went wrong!"
+            render :new
         end
     end
 
@@ -33,16 +33,17 @@ class QuizzesController < ApplicationController
 
     def update
         if @quiz.update quiz_params
-            redirect_to quizzes_path
             flash[:primary] = "Your quiz has been successfully updated!"
+            redirect_to quizzes_path
           else
-            render :edit
             flash[:danger] = "Oops, something went wrong!"
+            render :edit
         end
     end
 
     def destroy
         @quiz.destroy
+        flash[:danger] = "Quiz deleted successfully!"
         redirect_to quizzes_path
     end
 
