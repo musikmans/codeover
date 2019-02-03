@@ -25,8 +25,8 @@ class QuizzesController < ApplicationController
         @questions = @quiz.questions.order(created_at: :desc)
         @question = Question.new
     end
-
-Q  def edit
+    
+    def edit
 
     end
 
