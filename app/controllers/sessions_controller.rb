@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
     def new
-        
+
     end
 
     def create
@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         if user&.authenticate(params[:password])
             session[:user_id] = user.id
             flash[:primary] = "Logged In"
-            redirect_to root_path
+            redirect_to quizzes_path
         else
             flash[:primary] = "Email or password is incorrect"
             render :new
@@ -20,6 +20,6 @@ class SessionsController < ApplicationController
     def destroy
         session[:user_id] = nil
         flash[:primary] = "Logged out"
-        redirect_to root_path
+        redirect_to quizzes_path
     end
 end
