@@ -2,43 +2,50 @@
 
 <%= form_with(model: @quiz, local: true) do |f| %>
     
-    <% if @quiz.errors.present? %>
-        <p class="form-errors" >
-            <%= @quiz.errors.full_messages.join(", ") %>
-        </p>
-    <% end %>
+    <div class="form-group" >
+        <% if @quiz.errors.present? %>
+            <p class="form-errors" >
+                <%= @quiz.errors.full_messages.join(", ") %>
+            </p>
+        <% end %>
 
-    <div>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-    </div>
-
-    <div>
-        <%= f.label :points %>
-        <%= f.text_field :points %>
-    </div>
-
-    <h1>Questions:</h1>
-    <% @questions.each do |question| %>
         <div>
-            <div>
-                <%= question.label :body %>
-                <%= question.text_area :body %>
-            </div>
+            <%= f.label :name, class: "control-label" %>
+            <%= f.text_field :name, class: "form-control" %>
+        </div>
+        <div>
+            <%= f.label :description, class: "control-label" %>
+            <%= f.text_field :description, class: "form-control" %>
+        </div>
+    </div>
+
+    <%= f.submit "Update your Quiz", class: "btn btn-primary" %>
+<% end %>
+
+<h1>Questions:</h1>
+<% @questions.each do |question| %>
+
+    <%= form_with(model: [@quiz, question], local: true) do |f| %>
+            
+        <div class="form-group" >
+            <% if question.errors.present? %>
+                <p class="form-errors">
+                    <%= question.errors.full_messages.join(", ") %>
+                </p>
+            <% end %>
 
             <div>
-                <%= question.label :points %>
-                <%= question.text_field :points %>
+                <%= f.label :body, class: "control-label" %>
+                <%= f.text_area :body, class: "form-control" %>
+            </div>
+            <div>
+                <%= f.label :points, class: "control-label" %>
+                <%= f.text_field :points, class: "form-control" %>
             </div>
         </div>
-        
-        <small>
-            <% if can?(:edit, @question) %>
-                <%= link_to("Edit Question", edit_quiz_question_path(@quiz.id, question.id)) %>
-            <% end  %>
-        </small>
+
+        <%= f.submit "Update Question", class: "btn btn-primary" %>
 
     <% end %>
 
-    <%= f.submit "Update your Quiz" %>
 <% end %>
