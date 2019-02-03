@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2019_02_02_023552) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_quizzes_on_user_id"
+    git push -u origin <feature-name>
   end
 
   create_table "users", force: :cascade do |t|
