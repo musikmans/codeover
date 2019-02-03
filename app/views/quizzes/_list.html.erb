@@ -1,0 +1,13 @@
+<ul class="quiz-list">
+  <% @quizzes.each do |quiz| %>
+    <li>
+
+        <%= link_to(quiz.name, quizzes_path) %> <br>
+        <%= link_to 'Edit quiz', edit_quiz_path(quiz), class: 'btn btn-sm btn-primary' %> 
+        <%= link_to 'Delete quiz', quiz_path(quiz), method: :delete, 
+                            data: {confirm: 'You are about to delete this quiz, are you sure?'},
+                            class: "btn btn-sm btn-danger" %>
+      
+    </li>
+  <% end %>
+</ul>

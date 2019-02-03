@@ -2,6 +2,15 @@ class User < ApplicationRecord
     has_many :questions, dependent: :nullify
     has_many :answers, dependent: :nullify
     has_many :quizzes, dependent: :nullify
+    
+    has_secure_password
+
+    has_secure_password
+
+    validates(
+        :first_name,
+        presence: true
+    )
 
     has_secure_password
 
