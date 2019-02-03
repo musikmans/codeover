@@ -20,7 +20,7 @@ class QuizzesController < ApplicationController
     end
 
     def index
-        @quizzes = Quiz.all
+        @quizzes = Quiz.all.order(created_at: :desc)
     end
 
     def show

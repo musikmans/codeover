@@ -3,7 +3,7 @@ class Answer < ApplicationRecord
   belongs_to :user
 
   validates(
-    :body, 
+    :answer_body, 
     presence: {
       message: "Answer can not be empty!"
     }
@@ -11,6 +11,6 @@ class Answer < ApplicationRecord
 
   validates(
     :correctness,
-    inclusion: {in: [true, false] }
+    inclusion: { in: [false, true] }
   )
 end
