@@ -37,20 +37,42 @@ users = User.all
 100.times do
     quiz_creator = users.sample
 
-    q = Quiz.create(
+    quiz = Quiz.create(
         name: Faker::Lorem.words(5, true).join(" "),
         description: Faker::Lorem.sentence(1, true, 5),
         user: quiz_creator
     )
 
-    if q.valid?
+    if quiz.valid?
+        questions = quiz.questions
         rand(0..25).times do
-            q.questions << Question.new(
+            question = Question.new(
                 body: Faker::Lorem.sentence(1, true, 2),
                 points: rand(5..25),
                 user: quiz_creator
             )
 
+            questions << question
+
+            counter = 1;
+            
+            4.times do
+                if counter == 1
+                    correctness = "true"
+                else
+                    correctness = "false"
+                end
+                
+                if question.valid?
+                    question.answers << Answer.create(
+                        answer_body: Faker::Lorem.sentence(1, true, 3),
+                        order: counter,
+                        correctness: correctness,
+                        user: quiz_creator
+                        )
+                    end
+                counter += 1
+            end
         end
     end
 end

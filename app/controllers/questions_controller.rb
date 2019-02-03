@@ -9,19 +9,25 @@ class QuestionsController < ApplicationController
     end
 
     def create 
-        @question = Question.new(body: params[:question][:body], points: params[:question][:points], user: current_user, quiz_id: params[:quiz_id])
-        @question.save!
+        # byebug
+        @question = Question.create(body: params[:question][:body], points: params[:question][:points], user: current_user, quiz_id: params[:quiz_id])
+        if !@question.persisted?
+            flash[:danger] = "Question was not saved to your quiz"
+        end
         Answer.create(question_id: @question.id, answer_body: params[:question][:answer_body_1], user_id: current_user, correctness: true, order: 1)
         Answer.create(question_id: @question.id, answer_body: params[:question][:answer_body_2], user_id: current_user, order: 2)
         Answer.create(question_id: @question.id, answer_body: params[:question][:answer_body_3], user_id: current_user, order: 3)
         Answer.create(question_id: @question.id, answer_body: params[:question][:answer_body_4], user_id: current_user, order: 4)
-
-        if @question.save
-            redirect_to new_quiz_question_path(params[:quiz_id])
+        
+        if params[:where_to] == "Save Question and Create a New One"
             flash[:primary] = "Question was created successfully!"
+            redirect_to new_quiz_question_path(params[:quiz_id])
+        elsif params[:where_to] == "Finish Quiz" 
+            flash[:primary] = "Your quiz was created successfully"
+            redirect_to quiz_path(params[:quiz_id])
         else
+            flash[:danger] = "Oops, something went wrong"
             render :new
-            flash[:danger] = "Oops, Something went wrong, question wasn't created!"
         end
     end
 
@@ -42,7 +48,7 @@ class QuestionsController < ApplicationController
 
     private
     def question_params
-        params.require(:question).permit(:body, :points, :answer_body_1, :answer_body_2, :answer_body_3, :answer_body_4)
+        params.require(:question).permit(:body, :points, :answer_body_1, :answer_body_2, :answer_body_3, :answer_body_4, :where_to)
     end
 
     def find_question

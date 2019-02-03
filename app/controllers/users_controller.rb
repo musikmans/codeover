@@ -9,11 +9,11 @@ class UsersController < ApplicationController
 
         if @user.save
             session[:user_id] = @user.id
-            redirect_to root_path
             flash[:primary] = "Signed Up"
+            redirect_to root_path
         else
-            render :new
             flash[:danger] = "Couldn't Sign Up, Something went wrong..."
+            render :new
         end
     end
 
