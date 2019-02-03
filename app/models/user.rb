@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
     validates(
         :email,
-        uniquness: true,
+        uniqueness: true,
         presence: {
             message: "Please enter an email!"
         },
