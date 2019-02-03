@@ -2,7 +2,6 @@ class QuestionsController < ApplicationController
     before_action :find_question, only: [:show, :edit, :update, :destroy]
 
     def new
-        # @question = Question.new
     end
 
     def create
@@ -28,12 +27,5 @@ class QuestionsController < ApplicationController
 
     end
 
-    private
-    def question_params
-        params.require(:question).permit(:body, :points)
-    end
 
-    def find_question
-        @question = Question.find params[:id]
-    end
 end
