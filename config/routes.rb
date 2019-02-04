@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   resources :questions do
     resources :answers
   end
+
+  resources :results, only: [:create, :index]
 end

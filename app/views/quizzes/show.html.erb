@@ -1,12 +1,23 @@
 <h1><%= @quiz.name %></h1>
-<%= form_tag("/search", method: "post") do %>
-    <% @questions.each do |question| %>
-    <h5><%= @counter %> - <%= question.body %> </h5>
-    <% question.answers.map do |answer| %>
-        <%= radio_button_tag("answer".concat(@counter).to_sym, answer.answer_body) %>&nbsp;<%= answer.answer_body %><br/>
+
+<%= form_tag("/results", method: "post") do %>
+
+    <% @questions.shuffle.each do |question| %>
+
+        <h5><%= @counter %> - <%= question.body %> </h5>
+
+        <% question.answers.shuffle.map do |answer| %>
+            <%= radio_button_tag("question#{question.id}", answer.id) %>&nbsp;<%= answer.answer_body %><br/>
+        <% end %>
+            
+
+        <br />
+        <% @counter=@counter+1 %>
+    
     <% end %>
-    <br />
-    <% @counter=@counter+1 %>
-    <% end %>
+
     <%= hidden_field_tag(:iteration, @counter-1) %>
+    <%= hidden_field_tag(:quiz_id, @quiz.id) %>
+
+    <%= submit_tag "Submit Quiz", class: "btn btn-primary" %>
 <% end %>
