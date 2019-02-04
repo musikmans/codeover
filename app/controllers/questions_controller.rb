@@ -35,13 +35,12 @@ class QuestionsController < ApplicationController
     end
 
     def update
-       if @question.update question_params
-        flash[:primary] = "The question has been updated"
+        if @question.update question_params
+            flash[:primary] = "The question has been updated"
+        else
+            flash[:danger] = "Oops something went wrong, the question hasn't been updated.."
+        end
         redirect_to edit_quiz_path(@quiz.id)
-       else
-        render quizzes_path(@quiz)
-        flash[:danger] = "Oops something went wrong, the question hasn't been updated.."
-       end
     end
 
     def edit 
