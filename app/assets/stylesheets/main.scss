@@ -1,0 +1,25 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.container .intro p {
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.buttons {
+  margin-top:10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

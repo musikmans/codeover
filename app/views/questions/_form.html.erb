@@ -1,0 +1,45 @@
+<%= form_with(model: [@quiz, @question], local: true) do |f|  %>
+    
+        <div class="form-group" >
+            <% if @question.errors.present? %>
+                <p class="form-errors">
+                    <%= @question.errors.full_messages.join(", ") %>
+                </p>
+            <% end %>
+        <div>
+            <%= f.label :body, class: "control-label" %>
+            <%= f.text_area :body, class: "form-control" %>
+        </div>
+
+        <div>
+            <%= f.label :points, class: "control-label" %>
+            <%= f.text_field :points, class: "form-control" %>
+        </div>
+
+        <h1>Answers:</h1>
+
+        <div> 
+            <%= f.label :answer_body_1, class: "control-label" %> (This would be your correct answer for this question.)
+            <%= f.text_field :answer_body_1, class: "form-control" %>
+        </div>
+
+        <div>
+            <%= f.label :answer_body_2, class: "control-label" %>
+            <%= f.text_field :answer_body_2, class: "form-control" %>
+        </div>
+
+        <div>
+            <%= f.label :answer_body_3, class: "control-label" %>
+            <%= f.text_field :answer_body_3, class: "form-control" %>
+        </div>
+        
+        <div>
+            <%= f.label :answer_body_4, class: "control-label" %>
+            <%= f.text_field :answer_body_4, class: "form-control" %>
+        </div>
+    </div>
+
+    <%= f.submit "Save Question and Create a New One", name: "where_to" ,class: "btn btn-primary" %>
+    <%= f.submit "Finish Quiz", name: "where_to", class: "btn btn-primary" %>
+
+<% end %>

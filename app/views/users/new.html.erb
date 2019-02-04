@@ -1,0 +1,24 @@
+<h1>Sign Up</h1>
+<%= form_with model: @user, local: true do |f| %>
+  <% if @user.errors.any? %>
+    <p>
+      <%= @user.errors.full_messages.join(', ') %>
+    </p>
+  <% end %>
+  <div class="form-group">
+    <%= f.text_field :first_name, :class => "form-control form-control-sm", :placeholder => "First name", :style => "width:200px" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :last_name, :class => "form-control form-control-sm", :placeholder => "Last name", :style => "width:200px" %>
+  </div>
+  <div class="form-group"> 
+    <%= f.email_field :email, :class => "form-control form-control-sm", :placeholder => "Email", :style => "width:200px" %>
+  </div>
+  <div class="form-group">
+    <%= f.password_field :password, :class => "form-control form-control-sm", :placeholder => "Password", :style => "width:200px" %>
+  </div>
+  <div class="form-group">
+     <%=  f.password_field :password_confirmation, :class => "form-control form-control-sm", :placeholder => "Password confirmation", :style => "width:200px" %>
+  </div>
+  <%= f.submit "Sign Up", :class => "btn btn-danger", :style => "background-color:#cc0000" %>
+<% end %>
