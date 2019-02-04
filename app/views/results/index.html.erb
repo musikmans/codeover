@@ -1,3 +1,7 @@
 <h1>Results:</h1>
 
-Your score: <%= @result %> out of 100 
+<p>Your score: </p>
+
+<h2><%= @result %>/100</h2><br />
+
+<%= button_to("Take another quiz", quizzes_path, :class => "btn btn-danger", method: :get, :style => "background-color:#ce0000;") %>
