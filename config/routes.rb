@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   end
 
   resources :results, only: [:create, :index]
+  resource :leaderboards, only: [:show]
 end
