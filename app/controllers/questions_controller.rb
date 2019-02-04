@@ -36,8 +36,8 @@ class QuestionsController < ApplicationController
 
     def update
        if @question.update question_params
-        redirect_to edit_quiz_path(@quiz.id)
         flash[:primary] = "The question has been updated"
+        redirect_to edit_quiz_path(@quiz.id)
        else
         render quizzes_path(@quiz)
         flash[:danger] = "Oops something went wrong, the question hasn't been updated.."
@@ -50,7 +50,7 @@ class QuestionsController < ApplicationController
 
     def destroy
         @question.destroy
-        redirect_to quizzes_path(@quiz)
+        redirect_to edit_quiz_path(@quiz.id)
     end
 
     private
