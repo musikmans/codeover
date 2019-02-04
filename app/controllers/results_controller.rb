@@ -14,13 +14,23 @@ class ResultsController < ApplicationController
                 }
                 UserAnswer.create(question_id: q_id, quiz_id: params[:quiz_id], answer_id: params[key], user: current_user)
                 question = Question.find(q_id)
+
                 answer_correctness = Answer.find(params[key])
                 answer_correctness_value = answer_correctness.correctness 
-                @total_points += question.points
+
                 if answer_correctness_value == true
                     @points += question.points.to_i
                 end
             end
+        end
+
+        @quiz = Quiz.find(params[:quiz_id])
+        @questions = @quiz.questions
+
+        @total_points = 0;
+        @questions.each do |question|
+
+           @total_points += question.points 
         end
 
         user_score = Leaderboard.new(user_id: current_user.id, scores: @points, user_name: current_user.full_name )
@@ -28,7 +38,6 @@ class ResultsController < ApplicationController
     end
 
     def index
-        # byebug
         length_of_quiz = params[:iteration].to_i
 
         @points = params[:points]
