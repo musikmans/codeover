@@ -15,10 +15,10 @@ class QuestionsController < ApplicationController
         if !@question.persisted?
             flash[:danger] = "Question was not saved to your quiz"
         end
-        Answer.create(question_id: @question.id, answer_body: params[:question][:answer_body_1], user_id: current_user, correctness: true, order: 1)
-        Answer.create(question_id: @question.id, answer_body: params[:question][:answer_body_2], user_id: current_user, order: 2)
-        Answer.create(question_id: @question.id, answer_body: params[:question][:answer_body_3], user_id: current_user, order: 3)
-        Answer.create(question_id: @question.id, answer_body: params[:question][:answer_body_4], user_id: current_user, order: 4)
+        Answer.create(question_id: @question.id, answer_body: params[:question][:answer_body_1], user_id: current_user.id, correctness: true, order: 1)
+        Answer.create(question_id: @question.id, answer_body: params[:question][:answer_body_2], user_id: current_user.id, order: 2)
+        Answer.create(question_id: @question.id, answer_body: params[:question][:answer_body_3], user_id: current_user.id, order: 3)
+        Answer.create(question_id: @question.id, answer_body: params[:question][:answer_body_4], user_id: current_user.id, order: 4)
         
         if params[:where_to] == "Save Question and Create a New One"
             flash[:primary] = "Question was created successfully!"

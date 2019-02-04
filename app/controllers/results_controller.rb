@@ -1,6 +1,7 @@
 class ResultsController < ApplicationController
     def create
         @points = 0
+        @total_points = 0
         params.permit(params)
         params.keys.each do |key|
             if key.include?("question")
@@ -15,17 +16,14 @@ class ResultsController < ApplicationController
                 question = Question.find(q_id)
                 answer_correctness = Answer.find(params[key])
                 answer_correctness_value = answer_correctness.correctness 
-
+                @total_points += question.points
                 if answer_correctness_value == true
                     @points += question.points.to_i
                 end
-
             end
         end
 
-
-
-        redirect_to results_path(iteration: params[:iteration], quiz_id: params[:quiz_id], points: @points)
+        redirect_to results_path(iteration: params[:iteration], quiz_id: params[:quiz_id], points: @points, total_points: @total_points)
 
     end
 
@@ -33,7 +31,8 @@ class ResultsController < ApplicationController
         # byebug
         length_of_quiz = params[:iteration].to_i
 
-        @question_points = params[:points] 
+        @points = params[:points]
+        @total_points = params[:total_points]
 
     end
 end
