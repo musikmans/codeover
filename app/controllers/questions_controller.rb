@@ -9,7 +9,6 @@ class QuestionsController < ApplicationController
     end
 
     def create 
-        # byebug
         quiz = params[:quiz_id]
         @question = Question.create(body: params[:question][:body], points: params[:question][:points], user: current_user, quiz_id: quiz)
         if !@question.persisted?
