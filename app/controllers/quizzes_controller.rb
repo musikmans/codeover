@@ -24,6 +24,7 @@ class QuizzesController < ApplicationController
     end
 
     def show
+        @counter = 1
         @questions = @quiz.questions.order(created_at: :asc)
     end
     
