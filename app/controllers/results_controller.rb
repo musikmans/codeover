@@ -1,7 +1,6 @@
 class ResultsController < ApplicationController
     def create
-
-        arr = []
+        @points = 0
         params.permit(params)
         params.keys.each do |key|
             if key.include?("question")
@@ -12,14 +11,29 @@ class ResultsController < ApplicationController
                     quiz_id: params[:quiz_id],
                     user: current_user.id
                 }
-                # arr << param_obj
                 UserAnswer.create(question_id: q_id, quiz_id: params[:quiz_id], answer_id: params[key], user: current_user)
+                question = Question.find(q_id)
+                answer_correctness = Answer.find(params[key])
+                answer_correctness_value = answer_correctness.correctness 
+
+                if answer_correctness_value == true
+                    @points += question.points.to_i
+                end
+
             end
         end
-        redirect_to results_path
+
+
+
+        redirect_to results_path(iteration: params[:iteration], quiz_id: params[:quiz_id], points: @points)
+
     end
 
     def index
-    
+        # byebug
+        length_of_quiz = params[:iteration].to_i
+
+        @question_points = params[:points] 
+
     end
 end

@@ -10,6 +10,7 @@ Quiz.destroy_all
 Question.destroy_all
 User.destroy_all
 Answer.destroy_all
+UserAnswer.destroy_all
 
 PASSWORD = "supersecret"
 
