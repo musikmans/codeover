@@ -63,9 +63,9 @@ class QuizzesController < ApplicationController
     end
 
     def authorize_user!    
-        unless can?(:crud, @question)
+        unless can?(:crud, @quiz)
           flash[:danger] = "Access Denied"
-          redirect_to question_path(@question)
+          redirect_to quizzes_path
         end
     end
 end

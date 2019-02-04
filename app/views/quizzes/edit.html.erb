@@ -21,9 +21,10 @@
 
     <%= f.submit "Update your Quiz", class: "btn btn-primary" %>
 <% end %>
-    
-<h1>Questions:</h1>
 
+<br><br><br>
+
+<h1>Add a Question to this Quiz:</h1>
 <%= form_with(model: [@quiz, @question], local: true) do |f|  %>
     
         <div class="form-group" >
@@ -42,7 +43,7 @@
             <%= f.text_field :points, class: "form-control" %>
         </div>
 
-        <h1>Answers:</h1>
+        <h1>Add Answers to this Question:</h1>
 
         <div>
             <%= f.label :answer_body_1, class: "control-label" %>
@@ -69,8 +70,11 @@
 
 <% end %>
 
-<% @questions.each do |question| %>
+<br><br><br>
 
+<% index = 0 %>
+<% @questions.each do |question| %>
+<% index += 1%>
     <%= form_with(model: [@quiz, question], local: true) do |f| %>
             
         <div class="form-group" >
@@ -79,7 +83,7 @@
                     <%= question.errors.full_messages.join(", ") %>
                 </p>
             <% end %>
-
+            <h1>Edit Question <%= index %>: </h1>
             <div>
                 <%= f.label :body, class: "control-label" %>
                 <%= f.text_area :body, class: "form-control" %>
@@ -93,5 +97,5 @@
         <%= f.submit "Update Question", class: "btn btn-primary" %>
         <%= link_to("Delete Question", quiz_question_path(@quiz.id, question.id), method: :delete, class: "btn btn-primary") %>
     <% end %>
-
+    <br><br><br>
 <% end %>
