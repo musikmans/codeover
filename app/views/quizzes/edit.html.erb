@@ -81,17 +81,20 @@
             <% end %>
 
             <div>
-                <%= f.label :body, class: "control-label" %>
+                <%= f.label :Question, class: "control-label" %>
                 <%= f.text_area :body, class: "form-control" %>
             </div>
             <div>
-                <%= f.label :points, class: "control-label" %>
+                <%= f.label :Points, class: "control-label" %>
                 <%= f.text_field :points, class: "form-control" %>
             </div>
         </div>
 
         <%= f.submit "Update Question", class: "btn btn-primary" %>
         <%= link_to("Delete Question", quiz_question_path(@quiz.id, question.id), method: :delete, class: "btn btn-primary") %>
+        <%= link_to 'Edit Answers', edit_quiz_question_path(@quiz), class: "btn btn-primary" %>
+        
+
     <% end %>
 
 <% end %>

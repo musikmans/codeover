@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
     before_action :authenticate_user!
-    before_action :find_question, only: [:update, :destroy]
+    before_action :find_question, only: [:update, :destroy, :edit]
     before_action :authorize_user!, only: [:update, :destroy]
 
     def new 
@@ -42,6 +42,10 @@ class QuestionsController < ApplicationController
         render quizzes_path(@quiz)
         flash[:danger] = "Oops something went wrong, the question hasn't been updated.."
        end
+    end
+
+    def edit 
+        @answers = @question.answers
     end
 
     def destroy
