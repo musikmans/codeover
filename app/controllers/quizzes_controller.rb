@@ -20,7 +20,11 @@ class QuizzesController < ApplicationController
     end
 
     def index
-        @quizzes = Quiz.paginate(page: params[:page], per_page: 12)
+        if params[:where_to] == "My quizzes"
+            @quizzes = Quiz.where(:user_id => current_user.id).paginate(page: params[:page], per_page: 12)
+        else 
+            @quizzes = Quiz.paginate(page: params[:page], per_page: 12)
+        end
     end
 
     def show
