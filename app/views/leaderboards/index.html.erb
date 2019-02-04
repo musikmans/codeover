@@ -1,0 +1,16 @@
+<h1>Leaderboards Page</h1>
+
+<%= @total_points_per_user.each do |user_score| %>
+    
+    <table>
+        <tr>
+            <td>    
+                <%#= user_score.user_full_name %>
+            </td>
+            <td>
+                <%= user_score %>
+            </td>
+        </tr>
+    </table>
+
+<% end %>

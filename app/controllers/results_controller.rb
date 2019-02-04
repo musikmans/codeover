@@ -23,8 +23,8 @@ class ResultsController < ApplicationController
             end
         end
 
+        user_score = Leaderboard.new(user_id: current_user.id, scores: @points, user_name: current_user.full_name )
         redirect_to results_path(iteration: params[:iteration], quiz_id: params[:quiz_id], points: @points, total_points: @total_points)
-
     end
 
     def index

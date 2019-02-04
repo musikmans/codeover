@@ -36,6 +36,9 @@
           <li class="nav-item">
             <%= link_to("My Quizzes", quizzes_path(where_to: "My quizzes"), :class => "nav-link") %>
           </li>
+          <%#<li class="nav-item" >%>
+            <%#= link_to("Leaderboard", leaderboards_path, :class => "nav-link" ) %>
+          <%#</li>%>
           <li class="nav-item">
           <%= link_to "Logout", session_path,
           method: :delete,
