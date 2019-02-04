@@ -10,7 +10,8 @@ class QuestionsController < ApplicationController
 
     def create 
         # byebug
-        @question = Question.create(body: params[:question][:body], points: params[:question][:points], user: current_user, quiz_id: params[:quiz_id])
+        quiz = params[:quiz_id]
+        @question = Question.create(body: params[:question][:body], points: params[:question][:points], user: current_user, quiz_id: quiz)
         if !@question.persisted?
             flash[:danger] = "Question was not saved to your quiz"
         end
@@ -21,10 +22,13 @@ class QuestionsController < ApplicationController
         
         if params[:where_to] == "Save Question and Create a New One"
             flash[:primary] = "Question was created successfully!"
-            redirect_to new_quiz_question_path(params[:quiz_id])
+            redirect_to new_quiz_question_path(quiz)
         elsif params[:where_to] == "Finish Quiz" 
             flash[:primary] = "Your quiz was created successfully"
-            redirect_to quiz_path(params[:quiz_id])
+            redirect_to quiz_path(quiz)
+        elsif params[:where_to] == "Save Question"
+            flash[:primary] = "Your question has been added!"
+            redirect_to edit_quiz_path(quiz)
         else
             flash[:danger] = "Oops, something went wrong"
             render :new
