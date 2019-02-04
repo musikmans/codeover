@@ -33,6 +33,7 @@ class ResultsController < ApplicationController
 
         @points = params[:points]
         @total_points = params[:total_points]
+        @result = (@points.to_i * 100)/@total_points.to_i
 
     end
 end
