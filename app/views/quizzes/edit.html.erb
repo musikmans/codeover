@@ -96,7 +96,7 @@
 
         <%= f.submit "Update Question", class: "btn btn-primary" %>
         <%= link_to("Delete Question", quiz_question_path(@quiz.id, question.id), method: :delete, class: "btn btn-primary") %>
-        <%= link_to 'Edit Answers', edit_quiz_question_path(@quiz), class: "btn btn-primary" %>
+        <%= link_to 'Edit Answers', edit_quiz_question_path(@quiz, question.id), class: "btn btn-primary" %>
         
 
     <% end %>
